@@ -13,6 +13,12 @@ dependencies:
     github: TechMagister/crom-redis.cr
 ```
 
+## Features
+- [x] Insert Basic Object
+- [x] Update Basic Object
+- [x] Delete Basic Object
+- [x] Fetch by Id
+- [ ] Aggregation support
 
 ## Usage
 
