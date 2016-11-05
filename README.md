@@ -1,6 +1,6 @@
 # crom-redis
 
-TODO: Write a description here
+Redis backend for [CROM](https://github.com/TechMagister/crom.cr) ( CRystal Object Mapper)
 
 ## Installation
 
@@ -42,11 +42,9 @@ crom = CROM.container("redis://") # eq redis://localhost:6379
 ```
 
 
-TODO: Write usage instructions here
-
 ## Development
 
-TODO: Write development instructions here
+To run spec, run a redis server and configure the URI in ./spec/spec_helper.cr
 
 ## Contributing
 
