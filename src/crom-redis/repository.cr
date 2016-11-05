@@ -19,7 +19,7 @@ module CROM::Redis
     def [](id)
       if ret = gateway.by_id(T.dataset, id)
         model = T.from_json(ret)
-        model.id = id
+        model.redis_id = id
         model
       end
     end
@@ -37,19 +37,19 @@ module CROM::Redis
     # execute insert operation
     def do_insert(model : T, *args)
       id = gateway.insert(dataset: T.dataset, value: model.to_json)
-      model.id = id
+      model.redis_id = id
       model
     end
 
     #execute update
     def do_update(model : T, *args)
-      gateway.update dataset: T.dataset, id: model.id.not_nil!, value: model.to_json
-      self.[model.id.not_nil!]
+      gateway.update dataset: T.dataset, id: model.redis_id.not_nil!, value: model.to_json
+      self.[model.redis_id.not_nil!]
     end
 
     # execute delete
     def do_delete(model : T, *args)
-      gateway.delete dataset: T.dataset, id: model.id
+      gateway.delete dataset: T.dataset, id: model.redis_id
     end
 
     def delete_all()

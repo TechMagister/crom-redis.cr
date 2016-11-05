@@ -8,7 +8,7 @@ module CROM
 
     include CROM::Redis::Events
 
-    property id : String?
+    property redis_id : String?
 
     JSON.mapping({{properties}})
 

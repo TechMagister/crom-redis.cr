@@ -3,7 +3,7 @@ module CROM::Redis
   module Events
 
     def after_delete(arg)
-      @id = nil if arg
+      @redis_id = nil if arg
     end
 
 

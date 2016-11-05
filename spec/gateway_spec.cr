@@ -30,7 +30,7 @@ describe CROM::Redis::Gateway do
     user = User.new(name: "Toto", age: 10)
     users.insert(user)
 
-    user.id.should_not be_nil
+    user.redis_id.should_not be_nil
   end
 
   it "should update an object" do
@@ -40,12 +40,12 @@ describe CROM::Redis::Gateway do
     
     users.update user
 
-    updated_user = users[user.id]
+    updated_user = users[user.redis_id]
     updated_user.should_not be_nil
 
     if uu = updated_user
       uu.name.should eq("Toto2")
-      uu.id.should eq(user.id)
+      uu.redis_id.should eq(user.redis_id)
       uu.age.should eq(11)
     end
   end
@@ -55,12 +55,23 @@ describe CROM::Redis::Gateway do
     all_users.size.should eq(2)
     
     expected = [
-      {"Toto", 10},
-      {"Toto2", 11}
+      ["Toto", 10],
+      ["Toto2", 11]
     ]
 
-    res = all_users.map { |u| {u.name, u.age} }
-    res.should eq( expected )
+    expected2 = [
+      ["Toto2", 11],
+      ["Toto", 10]
+    ]
+
+    res = all_users.map { |u| [u.name, u.age] }
+
+    # depends on the order
+    if res[0][0] == "Toto"
+      res.should eq(expected)
+    else
+      res.should eq(expected2)
+    end
 
   end
 
@@ -68,12 +79,12 @@ describe CROM::Redis::Gateway do
     user = User.new(name: "Toto", age: 15)
     users.insert(user)
     
-    user.id.should_not be_nil
+    user.redis_id.should_not be_nil
 
-    old_id = user.id
+    old_redis_id = user.redis_id
     users.delete user
-    user.id.should be_nil
-    users[old_id].should be_nil
+    user.redis_id.should be_nil
+    users[old_redis_id].should be_nil
   end
 
 end
