@@ -10,7 +10,7 @@ Add this to your application's `shard.yml`:
 ```yaml
 dependencies:
   crom-redis:
-    github: [your-github-name]/crom-redis
+    github: TechMagister/crom-redis.cr
 ```
 
 
@@ -19,6 +19,26 @@ dependencies:
 
 ```crystal
 require "crom-redis"
+
+class User
+  CROM.mapping(:redis, {
+    name: String,
+    age:  Int32,
+  })
+end
+
+class Users < CROM::Redis::Repository(User)
+end
+
+crom = CROM.container("redis://") # eq redis://localhost:6379
+
+# user_repo = Users.new crom
+# or
+# CROM.register_repository :users, Users.new crom
+# if repo = CROM.repository(:users).as(Users)
+#   ... do stuff ...
+# end
+
 ```
 
 
@@ -30,7 +50,7 @@ TODO: Write development instructions here
 
 ## Contributing
 
-1. Fork it ( https://github.com/[your-github-name]/crom-redis/fork )
+1. Fork it ( https://github.com/TechMagister/crom-redis.cr/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
@@ -38,4 +58,4 @@ TODO: Write development instructions here
 
 ## Contributors
 
-- [[your-github-name]](https://github.com/[your-github-name]) Arnaud Fernandés - creator, maintainer
+- [TechMagister](https://github.com/TechMagister) Arnaud Fernandés - creator, maintainer
