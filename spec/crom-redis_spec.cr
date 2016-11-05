@@ -1,9 +1,4 @@
 require "./spec_helper"
 
-describe Crom::Redis do
-  # TODO: Write tests
-
-  it "works" do
-    false.should eq(true)
-  end
+describe CROM::Redis do
 end

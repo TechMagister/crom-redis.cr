@@ -1,5 +1,17 @@
+require "crom"
+
 require "./crom-redis/*"
 
-module Crom::Redis
-  # TODO Put your code here
+module CROM
+  
+  macro redis_adapter(properties)
+
+    include CROM::Redis::Events
+
+    property id : String?
+
+    JSON.mapping({{properties}})
+
+  end
+  
 end
