@@ -18,7 +18,7 @@ dependencies:
 - [x] Update Basic Object
 - [x] Delete Basic Object
 - [x] Fetch by Id
-- [ ] Aggregation support
+- [x] Aggregation support
 
 ## Usage
 
@@ -40,8 +40,8 @@ crom = CROM.container("redis://") # eq redis://localhost:6379
 
 # user_repo = Users.new crom
 # or
-# CROM.register_repository :users, Users.new crom
-# if repo = CROM.repository(:users).as(Users)
+# CROM.register_repository Users.new crom
+# if repo = Users.repo
 #   ... do stuff ...
 # end
 
